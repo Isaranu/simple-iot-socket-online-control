@@ -1,0 +1,70 @@
+<!DOCTYPE HTML>
+<html>
+<title>Test socket for IoT</title>
+
+<style>
+  button{
+    margin-right: 10px;
+  }
+</style>
+
+<body>
+
+<p>Internet of Things system by SOCKET.IO</p>
+<span>1. Check ONLINE/OFFLINE status of device.</span><br>
+<span>2. Take control LED on board.</span><br>
+<span>Powered by</span><a href="https://www.iottweet.com">IoTtweet</a>
+
+  <ul id="online_device"></ul>
+
+<button onclick="press_on()">LED ON</button>
+<button onclick="press_off()">LED OFF</button>
+
+<script src="./src/js/socket.io.js"></script>
+
+<script>
+  var onlineDev_list = document.getElementById('online_device');
+  var socket = io('http://xx.xx.xx.xx:3000/');
+
+  socket.on('connect', function(){
+    console.log('connected !');
+    socket.emit('dashboard', 'user001');
+  });
+
+  socket.on('response', function(resp){
+    console.log(resp);
+  });
+
+
+  /* Event : Check online, offline */
+  socket.on('event', function(data){});
+
+  socket.on('online_device', function(dev_name){
+    console.log(dev_name);
+    spawnList('ONLINE', dev_name);
+  });
+
+  socket.on('offline_device', function(dev_name){
+    console.log(dev_name);
+    spawnList('OFFLINE', dev_name);
+  });
+
+function press_on(){
+  socket.emit('ON', String(new Date()));
+}
+
+function press_off(){
+  socket.emit('OFF', String(new Date()));
+}
+
+function spawnList(_status, _dev_name){
+  var onlineDev = document.createElement('li');
+  var onlineDev_txt = document.createTextNode(_status + ' : ' + _dev_name + ' - ' + new Date());
+  onlineDev.append(onlineDev_txt);
+  onlineDev_list.append(onlineDev);
+}
+
+</script>
+
+</body>
+</html>
