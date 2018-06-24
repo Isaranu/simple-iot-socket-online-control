@@ -2,7 +2,7 @@
 ![alt_text](https://img.shields.io/badge/bulid-passing-brightgreen.svg "bulidpassing")
 ![alt_text](https://img.shields.io/badge/Compatible-ESP8266-green.svg "bulidpassing")<br>
 ![alt_text](https://img.shields.io/badge/Run-Google%20Cloud%20Platform-blue.svg "bulidpassing")<br>
-Use socket.io to control Internet of Things by real time.
+Use socket.io to real time controlling Internet of Things devices.
 
 ### Provided in 3 parts
 1. **IoT device** : Use ESP8266 series.<br>
